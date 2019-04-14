@@ -1,7 +1,7 @@
 {
-  "name": "phone-change",
+  "name": "hackaton-speakers",
   "version": "0.0.0",
-  "description": "Heroku Connect Sample App - Phone Change",
+  "description": "Heroku Connect Sample App - Hackathon Speakers",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

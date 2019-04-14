@@ -8,5 +8,6 @@
       "description": "Require SSL for Postgres",
       "value": "require"
     }
-  }
+  },
+  "addons": ["heroku-postgresql", "herokuconnect:demo"]
 }

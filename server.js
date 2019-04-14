@@ -9,7 +9,7 @@ app.set('port', process.env.PORT || 5000);
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-var minutes = 1;
+var minutes = 0.5;
 var the_interval = minutes * 60 * 1000;
 setInterval(function() {
     pg.connect(process.env.DATABASE_URL+'?ssl=true', function(err, client, done) {

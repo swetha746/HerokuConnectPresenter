@@ -26,12 +26,10 @@ setInterval(function() {
             } else {
                 var contacts = {};
                 result.rows.forEach(function(row){
-                    console.log(row.name);
-                    console.log(row.topic__c);
+                    console.log("Name: "+row.name);
+                    console.log("Topic: "+row.topic__c);
                     console.log("\n");
                 });
-                console.log('\n');
-                //console.log('contacts :', contacts);
             }
         })
     });

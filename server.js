@@ -9,17 +9,46 @@ app.set('port', process.env.PORT || 5000);
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+var minutes = 1;
+var the_interval = minutes * 60 * 1000;
+setInterval(function() {
+    pg.connect(process.env.DATABASE_URL+'?ssl=true', function(err, client, done) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        client.query(
+            'SELECT *'+
+            'FROM salesforce.presenter__c ', 
+        function(err, result) {
+            if (err) {
+                console.error(err);
+            } else {
+                var contacts = {};
+                result.rows.forEach(function(row){
+                    console.log(row.name);
+                    console.log(row.lastname__c);
+                    console.log(row.topic__c);
+                    //contacts[row.name] = row;
+                });
+                console.log('\n');
+                //console.log('contacts :', contacts);
+            }
+        })
+    });
+}, the_interval);
+
 app.post('/update', function(req, res) {
     pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
-            'UPDATE salesforce.Contact SET Phone = $1, MobilePhone = $1, HomePhone = $1 WHERE LOWER(FirstName) = LOWER($2) AND LOWER(LastName) = LOWER($3) AND LOWER(Email) = LOWER($4)',
-            [req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
+            'UPDATE salesforce.presenter__c SET topic__c = $1 WHERE LOWER(Name) = LOWER($2) AND LOWER(lastName__c) = LOWER($3)',
+            [req.body.topic.trim(), req.body.firstName.trim(), req.body.lastName.trim()],
             function(err, result) {
                 if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.Contact (Phone, MobilePhone, FirstName, LastName, Email) VALUES ($1, $2, $3, $4, $5)',
-                  [req.body.phone.trim(), req.body.phone.trim(), req.body.firstName.trim(), req.body.lastName.trim(), req.body.email.trim()],
+                  conn.query('INSERT INTO salesforce.presenter__c (topic__c, name, lastName__c) VALUES ($1, $2, $3)',
+                  [req.body.topic.trim(), req.body.firstName.trim(), req.body.lastName.trim()],
                   function(err, result) {
                     done();
                     if (err) {

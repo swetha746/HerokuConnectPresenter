@@ -11,13 +11,13 @@
   },
   "addons": [
     {
-      "plan": "heroku-postgresql",
+      "plan": "heroku-postgresql:hobby-dev",
       "options": {
         "version": "11.0"
       }
     },
     {
-      "plan": "heroku-connect"
+      "plan": "herokuconnect:demo"
     }
   ]
 }

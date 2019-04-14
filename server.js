@@ -27,9 +27,8 @@ setInterval(function() {
                 var contacts = {};
                 result.rows.forEach(function(row){
                     console.log(row.name);
-                    console.log(row.lastname__c);
                     console.log(row.topic__c);
-                    //contacts[row.name] = row;
+                    console.log("\n");
                 });
                 console.log('\n');
                 //console.log('contacts :', contacts);
@@ -43,12 +42,12 @@ app.post('/update', function(req, res) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
-            'UPDATE salesforce.presenter__c SET topic__c = $1 WHERE LOWER(Name) = LOWER($2) AND LOWER(lastName__c) = LOWER($3)',
-            [req.body.topic.trim(), req.body.firstName.trim(), req.body.lastName.trim()],
+            'UPDATE salesforce.presenter__c SET topic__c = $1 WHERE LOWER(Name) = LOWER($2)',
+            [req.body.topic.trim(), req.body.firstName.trim()],
             function(err, result) {
                 if (err != null || result.rowCount == 0) {
-                  conn.query('INSERT INTO salesforce.presenter__c (topic__c, name, lastName__c) VALUES ($1, $2, $3)',
-                  [req.body.topic.trim(), req.body.firstName.trim(), req.body.lastName.trim()],
+                  conn.query('INSERT INTO salesforce.presenter__c (topic__c, name) VALUES ($1, $2)',
+                  [req.body.topic.trim(), req.body.firstName.trim()],
                   function(err, result) {
                     done();
                     if (err) {

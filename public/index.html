@@ -24,10 +24,9 @@
                 $("#message").hide();
 
                 var firstName = $("#firstName").val();
-                var lastName = $("#lastName").val();
                 var topic = $("#topic").val();
 
-                if (firstName.length == 0 || lastName.length == 0 || topic.length == 0) {
+                if (firstName.length == 0 || topic.length == 0) {
                     errorMessage.text("All of the fields are required.");
                     error.show();
                 }
@@ -37,14 +36,12 @@
                         method: event.target.method,
                         data: JSON.stringify({
                             firstName: firstName,
-                            lastName: lastName,
                             topic: topic
                         }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function(data) {
                             $("#firstName").val("");
-                            $("#lastName").val("");
                             $("#topic").val("");
                             $("#messageMessage").text("Record updated!");
                             $("#message").show();
@@ -79,10 +76,6 @@
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
                     </div>
                     <div class="form-group">
                         <label for="topic">Topic</label>

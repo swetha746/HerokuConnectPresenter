@@ -1,7 +1,7 @@
 {
-  "name": "Phone Change",
-  "description": "Heroku Connect Sample App - Phone Change",
-  "repository": "https://github.com/jamesward/heroku-connect-phone-change",
+  "name": "Presenter App",
+  "description": "Heroku Connect Sample App - Presenters",
+  "repository": "",
   "success_url": "/setup.html",
   "env": {
     "PGSSLMODE": {
@@ -9,5 +9,15 @@
       "value": "require"
     }
   },
-  "addons": ["heroku-postgresql", "herokuconnect:demo"]
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "11.0"
+      }
+    },
+    {
+      "plan": "heroku-connect"
+    }
+  ]
 }

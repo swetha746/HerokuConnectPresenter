@@ -9,15 +9,5 @@
       "value": "require"
     }
   },
-  "addons": [
-    {
-      "plan": "heroku-postgresql:hobby-dev",
-      "options": {
-        "version": "11.0"
-      }
-    },
-    {
-      "plan": "herokuconnect:demo"
-    }
-  ]
+  "addons": ["heroku-postgresql", "herokuconnect:demo"]
 }
